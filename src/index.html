@@ -1,0 +1,45 @@
+<html>
+
+<head>
+<script type="text/javascript">
+	function getWeather() {
+
+		var zip = document.getElementById('zipcode_input').value;
+		var url = "https://api.nexteptraining.com/weather/" + zip;
+		
+		var response = httpGet(url);
+		var weather_response = JSON.parse(response);
+		var temp = weather_response.temp;
+
+		document.getElementById("weather_response_h2").innerHTML = "Temperature in your area is " + temp;
+		
+		return false;
+	}
+
+	function httpGet(theUrl) {
+		var xmlHttp = new XMLHttpRequest();
+		xmlHttp.open("GET", theUrl, false); // false for synchronous request
+		xmlHttp.send(null);
+		return xmlHttp.responseText;
+	}
+</script>
+</head>
+
+<body>
+
+	<h2>Welcome to my weather website..please enter your zip code and
+		click on get weather button</h2>
+
+	<form name="weather_form">
+
+		Zip code : <input type="text" name="zipcode" id = "zipcode_input"/> 
+		
+		<input type="submit" value="Get Weather" onclick="getWeather(); return false;">
+			
+		<h1 id="weather_response_h2"></h1>
+		
+	</form>
+
+</body>
+
+</html>
